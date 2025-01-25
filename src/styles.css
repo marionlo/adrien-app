@@ -154,5 +154,5 @@ input[type='file'] {
 }
 
 .middleConnectorWrapper {
-  display: none;
+  display: none!important;
 }
