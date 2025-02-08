@@ -19,6 +19,8 @@ export default function App() {
   );
   const [expanded, setExpanded] = useState(null);
 
+  const uatName = sessionStorage.getItem("uatName") || "UAT";
+
   const handleStepClick = (step, index) => setCurrentStep(index);
 
   const handleFormSubmit = (e, index) => {
@@ -190,6 +192,7 @@ export default function App() {
                 onSubmit={(e) => handleFormSubmit(e, index)}
                 key={index}
               >
+                <h1 className="contentTitle">UAT: {uatName}</h1>
                 <h2 className="contentTitle">
                   {step.stepLabel} {step.completed && "(Completed)"}
                 </h2>

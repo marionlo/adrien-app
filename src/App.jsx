@@ -4,6 +4,7 @@ import MainApp from "./MainApp";
 import HomePage from "./HomePage";
 import ProjectNamePage from "./ProjectNamePage";
 import AddUATPage from "./AddUATPage";
+import AddUATTransactionPage from "./AddUATTransactionPage";
 
 export default function App() {
   return (
@@ -12,6 +13,7 @@ export default function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/name-project" element={<ProjectNamePage />} />
         <Route path="/add-uat" element={<AddUATPage />} />
+        <Route path="/add-uat-transaction" element={<AddUATTransactionPage />} />
         <Route path="/main-app" element={<MainApp />} />
       </Routes>
     </Router>
