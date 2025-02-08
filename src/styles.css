@@ -23,7 +23,7 @@ body {
   display: flex;
   align-items: center;
   padding-left: 30px;
-  color: #c25715;
+  color: #BF2130;
   font-size: 30px;
 }
 .siteBody {
@@ -79,7 +79,7 @@ body {
 }
 
 .contentTitle {
-  color: #c25715;
+  color: #BF2130;
 }
 
 .submitButton {
@@ -87,7 +87,7 @@ body {
 }
 
 .submitButton, .inputFile::-webkit-file-upload-button {
-  background-color: #c25715;
+  background-color: #BF2130;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -107,7 +107,7 @@ input[type='file'] {
 
 
 .submitButton:hover, .inputFile::-webkit-file-upload-button:hover {
-  background-color: #a24512; /* Darker shade on hover */
+  background-color: #991016; /* Darker shade on hover */
 }
 
 .uploadedFiles {

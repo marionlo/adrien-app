@@ -88,26 +88,26 @@ export default function App() {
 
   const styles = {
     ActiveNode: () => ({
-      backgroundColor: "#c25715",
+      backgroundColor: "#BF2130",
     }),
     inActiveNode: () => ({
-      backgroundColor: "#bf8104",
+      backgroundColor: "#E93B4F",
     }),
     ActiveLabelTitle: () => ({
-      color: "#c25715",
+      color: "#BF2130",
     }),
     CompletedNode: () => ({
-      backgroundColor: "#c25715",
+      backgroundColor: "#BF2130",
     }),
     Node: () => ({
-      backgroundColor: "#bf8104",
+      backgroundColor: "#E93B4F",
     }),
     InactiveLineSeparator: () => ({
       minHeight: "50px",
     }),
     LineSeparator: () => ({
       minHeight: "50px",
-      backgroundColor: "#c25715",
+      backgroundColor: "#BF2130",
     }),
   };
 
