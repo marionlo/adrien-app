@@ -21,7 +21,11 @@ export default function App() {
 
   const uatName = sessionStorage.getItem("uatName") || "UAT";
 
-  const handleStepClick = (step, index) => setCurrentStep(index);
+  const handleStepClick = (step, index) => {
+    if (steps[index].completed) {
+      setCurrentStep(index);
+    }
+  };
 
   const handleFormSubmit = (e, index) => {
     e.preventDefault();
@@ -55,7 +59,7 @@ export default function App() {
       fileIcon = faFileImage;
     } else if (['doc', 'docx', 'txt', 'ost', 'pst'].includes(fileExtension)) {
       fileIcon = faFileWord;
-    } 
+    }
 
     const updatedFiles = {
       ...uploadedFiles,
@@ -153,11 +157,10 @@ export default function App() {
     });
   };
 
-  // Define custom labels for each step
   const stepLabels = [
     ["Business Requirements Document", "Business Requirements Document Approvals"],
     ["Test Scenario identification", "Test Scenario approval"],
-    ["Test Cases identification", "Test Cases approval", "JIRA link"], // Add third entry for text input
+    ["Test Cases identification", "Test Cases approval", "JIRA link"],
     ["UAT Testing details", "UAT Testing strategy approval email"],
     ["UAT Business sign off", "UAT Technical sign off"],
   ];
@@ -215,11 +218,9 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Dynamically render file upload sections based on the step */}
                 {stepLabels[index]?.map((label, fileIndex) => (
                   <div key={fileIndex}>
                     {index === 3 && fileIndex === 0 ? (
-                      // For the UAT Testing Strategy step, render the textareas
                       <>
                       <div className="formTextArea">
                         <label htmlFor={`prerequisites-${index}`}>Prerequisites:</label>
@@ -229,7 +230,7 @@ export default function App() {
                           value={stepTextInput[index]?.prerequisites || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'prerequisites')}
                         />
-                        
+
                         <label htmlFor={`scope-${index}`}>Testing scope and test cases:</label>
                         <textarea
                           id={`scope-${index}`}
@@ -237,7 +238,7 @@ export default function App() {
                           value={stepTextInput[index]?.scope || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'scope')}
                         />
-                        
+
                         <label htmlFor={`expectedResults-${index}`}>Expected results:</label>
                         <textarea
                           id={`expectedResults-${index}`}
@@ -245,7 +246,7 @@ export default function App() {
                           value={stepTextInput[index]?.expectedResults || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'expectedResults')}
                         />
-                        
+
                         <label htmlFor={`environment-${index}`}>Environment:</label>
                         <textarea
                           id={`environment-${index}`}
@@ -253,7 +254,7 @@ export default function App() {
                           value={stepTextInput[index]?.environment || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'environment')}
                         />
-                        
+
                         <label htmlFor={`signOff-${index}`}>Sign off:</label>
                         <textarea
                           id={`signOff-${index}`}
@@ -261,55 +262,46 @@ export default function App() {
                           value={stepTextInput[index]?.signOff || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'signOff')}
                         />
-                        
-                        {isCompleted(index) && (
-                          <div className="completedStatus">
-                            <FontAwesomeIcon icon={faCheckCircle} className="checkmarkIcon" />
-                            <span>Completed</span>
-                          </div>
-                        )}
-                        </div>
+                      </div>
                       </>
-                    ) : fileIndex === 2 ? (
-                      // For the JIRA link, render an input text field
-                      <>
+                    ) : index === 2 && fileIndex === 2 ? (
+                      <div className="formInput">
                         <label htmlFor={`jiraLink-${index}`}>JIRA Link:</label>
                         <input
+                          type="url"
                           id={`jiraLink-${index}`}
-                          type="text"
-                          className="inputText"
                           value={stepTextInput[index]?.jiraLink || ""}
                           onChange={(e) => handleTextInputChange(e, index, 'jiraLink')}
                         />
-                      </>
+                      </div>
                     ) : (
-                      // For other steps, render file upload inputs
-                      <>
-                        <label htmlFor={`file${fileIndex + 1}-${index}`}>{label}:</label>
+                      <div className="formInput">
+                        <label htmlFor={`file-${fileIndex}`}>{label}:</label>
                         <input
-                          id={`file${fileIndex + 1}-${index}`}
-                          type="file"
                           className="inputFile"
+                          type="file"
+                          id={`file-${fileIndex}`}
                           onChange={(e) => handleFileChange(e, index, `file${fileIndex + 1}`)}
                         />
                         {uploadedFiles[index]?.[`file${fileIndex + 1}`] && (
-                          <div className="uploadedFiles">
+                          <div className="fileInfo">
                             <FontAwesomeIcon icon={uploadedFiles[index][`file${fileIndex + 1}`].icon} />
-                            <p>{uploadedFiles[index][`file${fileIndex + 1}`].name}</p>
+                            <span>{uploadedFiles[index][`file${fileIndex + 1}`].name}</span>
                           </div>
                         )}
-                      </>
+                      </div>
                     )}
                   </div>
                 ))}
-
+                <div className="formButtonDiv">
                 <button
                   type="submit"
+                  className="button submitButton"
                   disabled={isSubmitDisabled(index)}
-                  className="submitButton"
                 >
-                  Submit
+                  {index === steps.length - 1 ? "Submit UAT" : isCompleted(index) ? "Save" : "Next"}
                 </button>
+                </div>
               </form>
             )
           ))}
