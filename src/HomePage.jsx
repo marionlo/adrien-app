@@ -40,7 +40,7 @@ export default function HomePage() {
               <li 
                 key={project.id} 
                 className="projectItem" 
-                onClick={project.name === "Projet Transaction" ? handleCreateUat : undefined}
+                onClick={project.name === "Transaction" ? handleCreateUat : undefined}
               >
                 {project.name}
               </li>
