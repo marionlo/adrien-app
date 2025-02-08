@@ -65,7 +65,10 @@ export default function App() {
       ...uploadedFiles,
       [stepIndex]: {
         ...uploadedFiles[stepIndex],
-        [fileKey]: { name: file.name, icon: fileIcon },
+        [fileKey]: [
+          ...(uploadedFiles[stepIndex]?.[fileKey] || []),
+          { name: file.name, icon: fileIcon },
+        ],
       },
     };
 
@@ -285,23 +288,29 @@ export default function App() {
                         />
                         {uploadedFiles[index]?.[`file${fileIndex + 1}`] && (
                           <div className="fileInfo">
-                            <FontAwesomeIcon icon={uploadedFiles[index][`file${fileIndex + 1}`].icon} />
-                            <span>{uploadedFiles[index][`file${fileIndex + 1}`].name}</span>
+                            {uploadedFiles[index][`file${fileIndex + 1}`].map((file, idx) => (
+                              <div key={idx}>
+                                <FontAwesomeIcon icon={file.icon} />
+                                <span>{file.name}</span>
+                              </div>
+                            ))}
                           </div>
                         )}
                       </div>
                     )}
                   </div>
                 ))}
-                <div className="formButtonDiv">
                 <button
                   type="submit"
-                  className="button submitButton"
+                  className="submitButton"
                   disabled={isSubmitDisabled(index)}
                 >
-                  {index === steps.length - 1 ? "Submit UAT" : isCompleted(index) ? "Save" : "Next"}
+                  {step.completed ? (
+                    "Save"
+                  ) : (
+                    "Submit"
+                  )}
                 </button>
-                </div>
               </form>
             )
           ))}
