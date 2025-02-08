@@ -15,9 +15,9 @@ export default function HomePage() {
   }
 
   const fakeProjects = [
-    { id: 1, name: "Projet Prométhée" },
-    { id: 2, name: "Projet Thanos" },
-    { id: 3, name: "Projet Transaction", onClick: handleCreateUat },
+    { id: 1, name: "Prométhée" },
+    { id: 2, name: "Thanos" },
+    { id: 3, name: "Transaction", onClick: handleCreateUat },
   ];
 
   return (
